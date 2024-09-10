@@ -156,7 +156,6 @@ const submitDelete = () => {
             <v-spacer />
             <v-btn
               color="error"
-              variant="text"
               @click="deleteDialog = false"
             >
               Cancel
@@ -164,7 +163,6 @@ const submitDelete = () => {
             <v-btn
               :loading="isLoading"
               color="primary"
-              variant="text"
               @click="submitDelete"
             >
               Delete

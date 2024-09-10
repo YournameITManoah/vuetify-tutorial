@@ -16,12 +16,12 @@ const breadcrumbs = [
   {
     title: 'Dashboard',
     disabled: false,
-    href: '/dashboard',
+    href: route('dashboard'),
   },
   {
     title: 'People',
     disabled: false,
-    href: '/people',
+    href: route('people.index'),
   },
   {
     title: 'Create',
@@ -38,9 +38,9 @@ const form = useForm({
 })
 
 const submit = () => {
-  form.post('/people', {
+  form.post(route('people.store'), {
     onSuccess: () => {
-      router.visit('/people')
+      router.visit(route('people.index'))
     },
   })
 }
@@ -59,7 +59,10 @@ const submit = () => {
       />
     </div>
     <v-card>
-      <v-form @submit.prevent="submit">
+      <v-form
+        :disabled="form.processing"
+        @submit.prevent="submit"
+      >
         <v-card-text>
           <v-row>
             <v-col
@@ -71,7 +74,6 @@ const submit = () => {
                 v-model="form.name"
                 :error-messages="form.errors.name"
                 label="Name"
-                variant="underlined"
               />
             </v-col>
             <v-col
@@ -86,7 +88,6 @@ const submit = () => {
                 item-title="text"
                 item-value="value"
                 label="Gender"
-                variant="underlined"
               />
             </v-col>
             <v-col
@@ -99,7 +100,6 @@ const submit = () => {
                 :error-messages="form.errors.email"
                 label="Email"
                 type="email"
-                variant="underlined"
               />
             </v-col>
             <v-col
@@ -112,7 +112,6 @@ const submit = () => {
                 :error-messages="form.errors.phone"
                 label="Phone"
                 type="tel"
-                variant="underlined"
               />
             </v-col>
             <v-col
@@ -123,22 +122,19 @@ const submit = () => {
                 v-model="form.address"
                 :error-messages="form.errors.address"
                 label="Address"
-                variant="underlined"
               />
             </v-col>
           </v-row>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <Link
-            as="div"
-            href="/people"
-          >
-            <v-btn variant="text">
+          <Link :href="route('people.index')">
+            <v-btn color="error">
               Cancel
             </v-btn>
           </Link>
           <v-btn
+            :loading="form.processing"
             color="primary"
             type="submit"
           >
