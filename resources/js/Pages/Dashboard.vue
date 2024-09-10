@@ -1,22 +1,38 @@
-<script setup lang="ts">
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+<script lang="ts" setup>
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
+import Breadcrumbs from '@/Components/Breadcrumbs.vue'
+import { Head } from '@inertiajs/vue3'
+
+defineOptions({
+  name: 'DashboardPage',
+})
+
+const breadcrumbs = [
+  {
+    title: 'Dashboard',
+    disabled: true,
+  },
+]
 </script>
 
 <template>
-    <Head title="Dashboard" />
-
-    <AuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dashboard</h2>
-        </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900 dark:text-gray-100">You're logged in!</div>
-                </div>
-            </div>
+  <Head title="Dashboard" />
+  <AuthenticatedLayout>
+    <div class="mb-5">
+      <h5 class="text-h5 font-weight-bold">
+        Dashboard
+      </h5>
+      <Breadcrumbs
+        :items="breadcrumbs"
+        class="pa-0 mt-1"
+      />
+    </div>
+    <v-card>
+      <v-card-text>
+        <div class="text-h6 text-medium-emphasis">
+          Welcome back, {{ $page.props.auth.user.name }}!
         </div>
-    </AuthenticatedLayout>
+      </v-card-text>
+    </v-card>
+  </AuthenticatedLayout>
 </template>
