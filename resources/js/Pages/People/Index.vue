@@ -14,7 +14,7 @@ const headers = [
   { title: 'Email', key: 'email' },
   { title: 'Phone Number', key: 'phone' },
   { title: 'Created At', key: 'created_at' },
-  { title: 'Action', key: 'action', sortable: false },
+  { title: 'Actions', key: 'action', sortable: false },
 ]
 
 const breadcrumbs = [
@@ -93,27 +93,25 @@ const submitDelete = () => {
         class="pa-0 mt-1"
       />
     </div>
-    <v-card class="pa-4">
-      <div class="d-flex flex-wrap align-center">
+    <v-card class="pa-2">
+      <v-card-title class="d-flex flex-wrap align-center">
         <v-text-field
           v-model="search"
           clearable
-          hide-details
+          density="compact"
           label="Search"
           prepend-inner-icon="mdi-magnify"
           single-line
-          variant="underlined"
+          variant="solo-filled"
         />
         <v-spacer />
-        <Link
-          as="div"
-          href="/people/create"
-        >
+        <Link href="/people/create">
           <v-btn color="primary">
             Create
           </v-btn>
         </Link>
-      </div>
+      </v-card-title>
+      <v-divider />
       <v-data-table-server
         v-model:options="options"
         :headers="headers"
@@ -121,28 +119,26 @@ const submitDelete = () => {
         :items-length="totalItems"
         :loading="isLoadingTable"
         :search="search"
-        class="elevation-0"
         @update:options="loadItems"
       >
         <template #[`item.gender`]="{ item }">
           {{ item.gender === 'male' ? 'Male' : 'Female' }}
         </template>
         <template #[`item.action`]="{ item }">
-          <Link
-            :href="`/people/${item.id}/edit`"
-            as="button"
-          >
-            <v-icon
+          <Link :href="`/people/${item.id}/edit`">
+            <v-btn
               color="warning"
               icon="mdi-pencil"
               size="small"
+              variant="text"
             />
           </Link>
-          <v-icon
+          <v-btn
             class="ml-2"
             color="error"
             icon="mdi-delete"
             size="small"
+            variant="text"
             @click="deleteItem(item)"
           />
         </template>
@@ -154,7 +150,7 @@ const submitDelete = () => {
         persistent
         width="auto"
       >
-        <v-card>
+        <v-card title="Confirm Action">
           <v-card-text>Are you sure you want to delete this item?</v-card-text>
           <v-card-actions>
             <v-spacer />

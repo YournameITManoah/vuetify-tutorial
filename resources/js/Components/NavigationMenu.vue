@@ -39,17 +39,5 @@ const navigation: NavItem[] = [
         link
       />
     </Link>
-    <!-- Log Out -->
-    <Link
-      :href="route('logout')"
-      as="div"
-      method="post"
-    >
-      <v-list-item
-        link
-        prepend-icon="mdi-exit-to-app"
-        title="Log Out"
-      />
-    </Link>
   </v-list>
 </template>

@@ -29,9 +29,7 @@ const breadcrumbs = [
     </div>
     <v-card>
       <v-card-text>
-        <div class="text-h6 text-medium-emphasis">
-          Welcome back, {{ $page.props.auth.user.name }}!
-        </div>
+        <v-card-title> Welcome back, {{ $page.props.auth.user.name }}! </v-card-title>
       </v-card-text>
     </v-card>
   </AuthenticatedLayout>

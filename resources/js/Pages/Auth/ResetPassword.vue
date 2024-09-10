@@ -2,6 +2,7 @@
 import GuestLayout from '@/Layouts/GuestLayout.vue'
 import { Head, useForm } from '@inertiajs/vue3'
 import PasswordField from '@/Components/PasswordField.vue'
+import EmailField from '@/Components/EmailField.vue'
 
 const props = defineProps<{
   email: string
@@ -25,40 +26,42 @@ const submit = () => {
 <template>
   <GuestLayout>
     <Head title="Reset Password" />
+    <v-card-title>Reset Password</v-card-title>
     <v-form
       :disabled="form.processing"
       @submit.prevent="submit"
     >
-      <v-text-field
-        v-model="form.email"
-        :error-messages="form.errors.email"
-        autocomplete="username"
-        label="Email"
-        prepend-inner-icon="mdi-email-outline"
-        type="email"
-      />
-      <password-field
-        v-model="form.password"
-        :errors="form.errors.password"
-        hint="new-password"
-        icon="mdi-lock-outline"
-      />
-      <password-field
-        v-model="form.password_confirmation"
-        :errors="form.errors.password_confirmation"
-        hint="new-password"
-        icon="mdi-lock-outline"
-        label="Password Confirmation"
-      />
-      <v-btn
-        :loading="form.processing"
-        block
-        class="mt-4"
-        color="primary"
-        type="submit"
-      >
-        Reset Password
-      </v-btn>
+      <v-col>
+        <email-field
+          v-model="form.email"
+          :errors="form.errors.email"
+        />
+      </v-col>
+      <v-col>
+        <password-field
+          v-model="form.password"
+          :errors="form.errors.password"
+          hint="new-password"
+        />
+      </v-col>
+      <v-col>
+        <password-field
+          v-model="form.password_confirmation"
+          :errors="form.errors.password_confirmation"
+          hint="new-password"
+          label="Password Confirmation"
+        />
+      </v-col>
+      <v-col cols="12">
+        <v-btn
+          :loading="form.processing"
+          block
+          color="primary"
+          type="submit"
+        >
+          Reset Password
+        </v-btn>
+      </v-col>
     </v-form>
   </GuestLayout>
 </template>

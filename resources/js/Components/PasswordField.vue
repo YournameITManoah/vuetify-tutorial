@@ -3,15 +3,15 @@ import { ref } from 'vue'
 
 withDefaults(
   defineProps<{
+    hint: 'current-password' | 'new-password' | 'cc-number' | 'cc-csc'
     label?: string
     icon?: string
     errors?: string
-    hint: 'current-password' | 'new-password' | 'cc-number' | 'cc-csc'
   }>(),
   {
-    icon: undefined,
-    errors: undefined,
     label: 'Password',
+    icon: 'mdi-lock-outline',
+    errors: undefined,
   },
 )
 
@@ -23,7 +23,7 @@ const showPassword = ref(false)
   <v-text-field
     v-model="model"
     :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-    :autocomplete="autocomplete"
+    :autocomplete="hint"
     :error-messages="errors"
     :label="label"
     :prepend-inner-icon="icon"

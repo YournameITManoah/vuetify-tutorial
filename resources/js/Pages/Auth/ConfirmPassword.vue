@@ -4,7 +4,7 @@ import { Head, useForm } from '@inertiajs/vue3'
 import { ref } from 'vue'
 
 defineProps<{
-  status: string
+  status?: string | null
 }>()
 
 const form = useForm({
